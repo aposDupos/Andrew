@@ -1,6 +1,8 @@
-import React, {useEffect, useRef} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import {motion, useAnimation} from "framer-motion"
 import {useInView} from "react-intersection-observer";
+import {Button} from "./components/Button";
+import {FirebaseContext} from "./context/firebase/firebaseContext";
 
 const cardVar = {
     initial: {
@@ -37,6 +39,11 @@ export const Card= ({item, color}) => {
     const iconRef = useRef(null)
     const controls = useAnimation()
     const [ref, inView] = useInView();
+    const {changeBalance, buyWish} = useContext(FirebaseContext)
+    const buyHandler = () =>{
+        buyWish(item.title)
+        changeBalance(-item.cost)
+    }
     useEffect(()=>{
         if (inView){
             controls.start("visible")
@@ -57,5 +64,8 @@ export const Card= ({item, color}) => {
         <motion.div className={"cardTitle"} >{item.title}</motion.div>
         <motion.div className={"cardCost"}>Стоимость: <span style={{color: color ? color : "black"}}>{item.cost}</span>
         </motion.div>
+        <div className="cardButton">
+            <Button onClick={buyHandler} text={"Купить"}/>
+        </div>
     </motion.div>
 }

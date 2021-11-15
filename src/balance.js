@@ -1,0 +1,1 @@
+export const balance = "1.000.000"
