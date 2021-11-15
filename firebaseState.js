@@ -6,6 +6,7 @@ import {BUY_WISH, CHANGE_BALANCE, GET_MONEY, SHOW_LOADER} from "../types";
 
 export const FirebaseState = ({children}) => {
     const URL = "https://andrews-wishlist-default-rtdb.europe-west1.firebasedatabase.app"
+    console.log(URL)
     const initialState = {
         balance: '',
         wishes: [],
